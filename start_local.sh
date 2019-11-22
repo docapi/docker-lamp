@@ -1,14 +1,14 @@
 #!/bin/bash
 
-DOMAIN=myweb.test
+HOST=$(grep HOST .env | cut -d '=' -f2)
 
 docker-compose up -d
 
-if grep -q $DOMAIN /etc/hosts; then
+if grep -q $HOST /etc/hosts; then
     echo "Host entry exists"
 else
-    echo "127.0.0.1 $DOMAIN"  | sudo tee -a /etc/hosts > /dev/null
+    echo "127.0.0.1 $HOST"  | sudo tee -a /etc/hosts > /dev/null
     echo "Added new host entry"
 fi
 
-echo "Webserver started at http://$DOMAIN"
+echo "Webserver started at http://$HOST"
