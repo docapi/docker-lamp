@@ -5,6 +5,7 @@ RUN apt-get update \
     && apt-get -y --no-install-recommends install \ 
     libxml2-dev \
     curl \
+    git \
     libmemcached-dev \
     libz-dev \
     libpq-dev \
@@ -13,6 +14,12 @@ RUN apt-get update \
     libfreetype6-dev \
     libssl-dev \
     libmcrypt-dev 
+
+# MHSendmail for Mail testing
+RUN curl -Lsf 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C '/usr/local' -xvzf -
+ENV PATH /usr/local/go/bin:$PATH
+RUN go get github.com/mailhog/mhsendmail
+RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail    
 
 # Copy PHP configuration
 # Edit docker/php.ini and customize it to your needs

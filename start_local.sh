@@ -2,7 +2,7 @@
 
 HOST=$(grep HOST .env | cut -d '=' -f2)
 
-docker-compose up -d
+docker-compose up -d 
 
 if grep -q $HOST /etc/hosts; then
     echo "Host entry exists"
