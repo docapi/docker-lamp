@@ -69,7 +69,10 @@ cp docker/db/.gitignore  ${DESTINATION_PATH}/${FOLDER_NAME}/docker/db/
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/docker/logs
 cp docker/logs/.gitignore  ${DESTINATION_PATH}/${FOLDER_NAME}/docker/logs/
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/docker/webserver
-cp {docker/webserver/Dockerfile,docker/webserver/php.ini} ${DESTINATION_PATH}/${FOLDER_NAME}/docker/webserver
+cp {docker/webserver/Dockerfile,docker/webserver/php.ini,docker/webserver/docker-php-pecl-install} ${DESTINATION_PATH}/${FOLDER_NAME}/docker/webserver
+
+# Insert PHP engine into dockerfile
+sed -i '' "s/\php:7\.2-apache/${opt}/g" ${DESTINATION_PATH}/${FOLDER_NAME}/docker/webserver/Dockerfile
 
 # Create env file
 echo "HOST=${HOST_NAME}" > ${DESTINATION_PATH}/${FOLDER_NAME}/.env
