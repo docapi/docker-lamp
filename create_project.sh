@@ -50,7 +50,6 @@ do
         *) echo "invalid option $REPLY, please select 1-4";;
     esac
 done
-echo $opt
 
 # Create project folder
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}
@@ -77,3 +76,8 @@ sed -i '' "s/\php:7\.2-apache/${opt}/g" ${DESTINATION_PATH}/${FOLDER_NAME}/docke
 # Create env file
 echo "HOST=${HOST_NAME}" > ${DESTINATION_PATH}/${FOLDER_NAME}/.env
 echo "DB=${DB_NAME}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
+
+# Create first run check file
+touch ${DESTINATION_PATH}/${FOLDER_NAME}/.firstrun
+
+echo -e "\033[32mEverything done!\033[0m"
