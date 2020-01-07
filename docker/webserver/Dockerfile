@@ -30,6 +30,7 @@ COPY docker-php-pecl-install /usr/local/bin/
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo
+RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install gd && \
