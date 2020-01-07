@@ -6,7 +6,7 @@ services:
     hostname: ${HOST}
     image: the_web
     ports:
-      - "127.0.0.1:80:80"
+      - "${WEB_PORT}:80"
     volumes:
       - ./www:/var/www/html
       - ./docker/logs:/var/log/apache2

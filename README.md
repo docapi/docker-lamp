@@ -5,7 +5,9 @@ A tool that generates a running PHP/MySQL DEV environment with Docker
 ## Features
 
 * select PHP Engine (5.6, 7.1, 7.2, 7.3)
-* select host name (*.test recommended)
+* select host name for local development (*.test recommended)
+* select port for local development (default: 80)
+* select host name for staging
 * select DB name
 
 ## How to start
@@ -18,11 +20,11 @@ A tool that generates a running PHP/MySQL DEV environment with Docker
 3. Go to the folder you selected in step 2
 4. Start engine
 ```
-./start_project.sh
+./start_system.sh
 ```
 5. Stop engine (optional)
 ```
-./stop_project.sh
+./stop_system.sh
 ```
 
 ## Author

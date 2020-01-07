@@ -22,12 +22,29 @@ do
     fi
 done
 
-# Choose Hostname
+# Choose Hostname local dev
 DEFAULT_HOST="docker.test"
 while [ -z ${HOST_NAME} ];
 do
-    read -e -p "Choose hostname [docker.test]:" HOST_NAME
+    read -e -p "Choose hostname for local development [docker.test]:" HOST_NAME
     HOST_NAME="${HOST_NAME:-${DEFAULT_HOST}}"
+done
+
+# Choose local dev web port
+DEFAULT_PORT="80"
+while [ -z ${WEB_PORT} ];
+do
+    read -e -p "Choose web port for local development [80]:" WEB_PORT
+    WEB_PORT="${WEB_PORT:-${DEFAULT_PORT}}"
+done
+
+
+# Choose Hostname staging
+DEFAULT_STAGING_HOST="staging.domain"
+while [ -z ${STAGE_HOST_NAME} ];
+do
+    read -e -p "Choose hostname for staging [staging.domain]:" STAGE_HOST_NAME
+    STAGE_HOST_NAME="${STAGE_HOST_NAME:-${DEFAULT_STAGING_HOST}}"
 done
 
 # Choose DBname
@@ -55,7 +72,7 @@ done
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}
 
 # Copy scripts
-cp {start_local.sh,stop_local.sh,docker-compose.yml} ${DESTINATION_PATH}/${FOLDER_NAME}/
+cp {start_system.sh,stop_system.sh,docker-compose.yml} ${DESTINATION_PATH}/${FOLDER_NAME}/
 
 # Create www folder
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/www
@@ -76,6 +93,15 @@ sed -i '' "s/\php:7\.2-apache/${opt}/g" ${DESTINATION_PATH}/${FOLDER_NAME}/docke
 # Create env file
 echo "HOST=${HOST_NAME}" > ${DESTINATION_PATH}/${FOLDER_NAME}/.env
 echo "DB=${DB_NAME}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
+echo "WEB_PORT=${WEB_PORT}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
+
+# Create staging env file
+mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/build
+mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging
+echo "HOST=${STAGE_HOST_NAME}" > ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
+echo "DB=${DB_NAME}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
+echo "WEB_PORT=80" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
+
 
 # Create first run check file
 touch ${DESTINATION_PATH}/${FOLDER_NAME}/.firstrun
