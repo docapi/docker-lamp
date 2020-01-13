@@ -20,8 +20,10 @@ services:
     volumes:
       - ./docker/db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
   
   mailhog:
     image: mailhog/mailhog

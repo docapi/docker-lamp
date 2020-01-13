@@ -77,6 +77,7 @@ cp {start_system.sh,stop_system.sh,docker-compose.yml} ${DESTINATION_PATH}/${FOL
 # Create www folder
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/www
 cp www/index.php  ${DESTINATION_PATH}/${FOLDER_NAME}/www/index.php
+cp www/dbtest.php  ${DESTINATION_PATH}/${FOLDER_NAME}/www/dbtest.php
 
 # Create docker folder
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/docker
@@ -93,6 +94,9 @@ sed -i '' "s/\php:7\.2-apache/${opt}/g" ${DESTINATION_PATH}/${FOLDER_NAME}/docke
 # Create env file
 echo "HOST=${HOST_NAME}" > ${DESTINATION_PATH}/${FOLDER_NAME}/.env
 echo "DB=${DB_NAME}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
+echo "DB_ROOT_PASSWORD=docker" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
+echo "DB_USER=dockeruser" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
+echo "DB_PASSWORD=12345678" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
 echo "WEB_PORT=${WEB_PORT}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/.env
 
 # Create staging env file
@@ -100,6 +104,9 @@ mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/build
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging
 echo "HOST=${STAGE_HOST_NAME}" > ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
 echo "DB=${DB_NAME}" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
+echo "DB_ROOT_PASSWORD=fhur8§hhdAA!!a" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
+echo "DB_USER=dockeruser" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
+echo "DB_PASSWORD=4hfGggJaj2!" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
 echo "WEB_PORT=80" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
 
 
