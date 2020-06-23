@@ -1,0 +1,17 @@
+exclude.txt
+.gitignore
+.gitattributes
+license.txt
+readme.html
+liesmich.html
+/build/develop/
+/docker/
+wp-config-sample.php
+/public/wp-content/uploads/
+start_local.sh
+stop_local.sh
+README.md
+docker-compose.yml
+dbdump_local.sh
+dbimport_local.sh
+/frontend

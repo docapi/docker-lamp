@@ -68,16 +68,19 @@ do
     esac
 done
 
+# With Wordpress?
+DEFAULT_WPYESNO="no"
+while [ -z ${WP_YESNO} ];
+do
+    read -e -p "Install Wordpress? yes|no [no]:" WP_YESNO
+    WP_YESNO="${WP_YESNO:-${DEFAULT_WPYESNO}}"
+done
+
 # Create project folder
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}
 
 # Copy scripts
 cp {start_system.sh,stop_system.sh,docker-compose.yml} ${DESTINATION_PATH}/${FOLDER_NAME}/
-
-# Create www folder
-mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/www
-cp www/index.php  ${DESTINATION_PATH}/${FOLDER_NAME}/www/index.php
-cp www/dbtest.php  ${DESTINATION_PATH}/${FOLDER_NAME}/www/dbtest.php
 
 # Create docker folder
 mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/docker
@@ -112,5 +115,27 @@ echo "WEB_PORT=80" >> ${DESTINATION_PATH}/${FOLDER_NAME}/build/staging/.env
 
 # Create first run check file
 touch ${DESTINATION_PATH}/${FOLDER_NAME}/.firstrun
+
+if [ $WP_YESNO=='yes' ]; then
+    mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/public
+
+    # Insert public path into docker compose file
+    sed -i '' "s/www:/public:/g" ${DESTINATION_PATH}/${FOLDER_NAME}/docker-compose.yml
+
+    # Insert composer install into start file
+    sed -i '' "s/##wordpress##/composer install/g" ${DESTINATION_PATH}/${FOLDER_NAME}/start_system.sh
+
+    # Copy wordpress files
+    cp wordpress/composer.json  ${DESTINATION_PATH}/${FOLDER_NAME}/
+    cp wordpress/index.php  ${DESTINATION_PATH}/${FOLDER_NAME}/public/
+    cp wordpress/.htaccess  ${DESTINATION_PATH}/${FOLDER_NAME}/public/
+    cp wordpress/.gitignore  ${DESTINATION_PATH}/${FOLDER_NAME}/
+    cp wordpress/exclude.txt  ${DESTINATION_PATH}/${FOLDER_NAME}/
+else
+    # Create www folder
+    mkdir ${DESTINATION_PATH}/${FOLDER_NAME}/www
+    cp www/index.php  ${DESTINATION_PATH}/${FOLDER_NAME}/www/index.php
+    cp www/dbtest.php  ${DESTINATION_PATH}/${FOLDER_NAME}/www/dbtest.php    
+fi
 
 echo -e "\033[32mEverything done!\033[0m"

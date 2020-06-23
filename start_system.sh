@@ -1,5 +1,7 @@
 #!/bin/bash
 
+##wordpress##
+
 HOST=$(grep HOST .env | cut -d '=' -f2)
 
 if test -f .firstrun; then

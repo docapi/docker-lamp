@@ -1,0 +1,10 @@
+/public/wordpress/
+/public/wp-content/uploads
+/public/wp-content/languages
+/public/wp-content/plugins
+/public/wp-config.php
+/vendor
+.idea
+/logs
+/db
+package-lock.json

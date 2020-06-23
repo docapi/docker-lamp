@@ -1,0 +1,68 @@
+{
+    "name": "alexp/wpsetup",
+    "description": "Composer setup for wordpress",
+    "repositories": {
+      "0": {
+        "type": "composer",
+        "url": "https://wpackagist.org"
+      },
+      "wp-sync-db": {
+        "type": "package",
+        "package": {
+          "name": "wp-sync-db/wp-sync-db",
+          "type": "wordpress-plugin",
+          "version": "1.5",
+          "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-sync-db/wp-sync-db/archive/1.5.zip"
+          }
+        }
+      },
+      "wp-sync-db-media-files": {
+        "type": "package",
+        "package": {
+          "name": "wp-sync-db/wp-sync-db-media-files",
+          "type": "wordpress-plugin",
+          "version": "1.1.5",
+          "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-sync-db/wp-sync-db-media-files/archive/1.1.5.zip"
+          }
+        }
+      },
+      "advanced-custom-fields-pro": {
+        "type": "package",
+        "package": {
+          "name": "advanced-custom-fields/advanced-custom-fields-pro",
+          "version": "5.8.7",
+          "type": "wordpress-plugin",
+          "dist": {
+            "type": "zip",
+            "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9NTg0Njl8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE1LTA2LTIwIDE2OjI2OjM3"
+          }
+        }
+      }
+    },
+    "require": {
+      "johnpbloch/wordpress": "5.4.*",
+      "advanced-custom-fields/advanced-custom-fields-pro": "*",
+      "wpackagist-plugin/wp-super-cache": "*",
+      "wpackagist-plugin/wordpress-seo": "*",
+      "wpackagist-plugin/classic-editor": "*",
+      "wpackagist-plugin/regenerate-thumbnails": "*",
+      "wpackagist-plugin/cookie-notice": "*",
+      "wpackagist-plugin/acf-better-search": "*",
+      "wp-sync-db/wp-sync-db": "*",
+      "wp-sync-db/wp-sync-db-media-files": "*",
+      "vlucas/phpdotenv": "*"
+    },
+    "extra": {
+      "installer-paths": {
+        "public/wp-content/plugins/{$name}/": [
+          "type:wordpress-plugin"
+        ]
+      },
+      "wordpress-install-dir": "public/wordpress"
+    }
+  }
+  
